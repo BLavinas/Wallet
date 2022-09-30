@@ -30,7 +30,6 @@ export const getCurrencies = () => async (dispatch) => {
     delete currencies.USDT;
 
     dispatch(getCurrenciesApi(Object.keys(currencies)));
-    console.log(Object.keys(currencies));
     // DEPOIS
     dispatch(finalReq);
   } catch (e) {
