@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
-import { getCurrencies } from '../redux/actions';
+import { getCurrencies, getWalletForm } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
-    // value: '',
-    // description: '',
-    // currency: '',
-    // method: '',
-    // tag: '',
-    // expenses: [],
-
+    value: '',
+    description: '',
+    currency: 'USD',
+    method: 'Dinheiro',
+    tag: 'Alimentação',
+    id: 0,
   };
 
   componentDidMount() {
@@ -26,20 +25,38 @@ class WalletForm extends Component {
     });
   };
 
+  handleClick = async () => {
+    const { dispatch } = this.props;
+    const { id } = this.state;
+    dispatch(getWalletForm(this.state));
+    this.setState({
+      id: id + 1,
+      value: '',
+      description: '',
+    });
+  };
+
+  // valueByCurrency = () => {
+  //   // const
+  // };
+
   render() {
     const { currencies } = this.props;
+    const { value, description } = this.state;
     return (
       <div>
         WalletForm
         <input
           type="text"
           name="value"
+          value={ value }
           data-testid="value-input"
           placeholder="Valor da despesa"
           onChange={ this.handleChange }
         />
         <input
           type="text"
+          value={ description }
           name="description"
           data-testid="description-input"
           placeholder="Descrição da despesa"
@@ -52,12 +69,12 @@ class WalletForm extends Component {
           data-testid="currency-input"
           onChange={ this.handleChange }
         >
-          {currencies.map((currencie) => (
+          {currencies.map((currency) => (
             <option
-              value={ currencie }
-              key={ currencie }
+              value={ currency }
+              key={ currency }
             >
-              {currencie}
+              {currency}
             </option>))}
         </select>
         <select
@@ -82,7 +99,13 @@ class WalletForm extends Component {
           <option value="Transporte">Transporte</option>
           <option value="Saúde">Saúde</option>
         </select>
-        <button type="button">Adicionar despesa</button>
+        <button
+          type="button"
+          onClick={ this.handleClick }
+        >
+          Adicionar despesa
+
+        </button>
       </div>
     );
   }
@@ -90,6 +113,7 @@ class WalletForm extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.espenses,
 });
 
 export default connect(mapStateToProps)(WalletForm);
