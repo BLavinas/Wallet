@@ -16,13 +16,13 @@ class Header extends Component {
   };
 
   render() {
-    const { email, expenses } = this.props;
+    const { email } = this.props;
     // console.log(expenses[0].exchangeRates);
     return (
       <div>
         <p data-testid="email-field">{email}</p>
         <p data-testid="total-field">
-          {expenses && this.totalExpense()}
+          {this.totalExpense()}
         </p>
         <p data-testid="header-currency-field">BRL</p>
       </div>

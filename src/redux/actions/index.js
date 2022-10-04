@@ -4,6 +4,7 @@ export const GET_CURRENCIESAPI = 'GET_CURRENCIESAPI';
 export const INITIAL_REQ = 'INITIAL_REQ';
 export const FINAL_REQ = 'FINAL_REQ';
 export const GET_RATES = 'GET_RATES';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 // Pegar email do estado local
 export const getEmail = (email) => ({
@@ -25,6 +26,11 @@ export const initialReq = {
 
 export const getRates = (payload) => ({
   type: GET_RATES,
+  payload,
+});
+
+export const deleteExpense = (payload) => ({
+  type: DELETE_EXPENSE,
   payload,
 });
 
