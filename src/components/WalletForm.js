@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-import { getCurrencies, getWalletForm } from '../redux/actions';
+import { editFormThunk, getCurrencies, getWalletForm } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
@@ -36,12 +36,14 @@ class WalletForm extends Component {
     });
   };
 
-  // valueByCurrency = () => {
-  //   // const
-  // };
+  editHandleClick = () => {
+    const { dispatch } = this.props;
+    const { value, description, currency, method, tag } = this.state;
+    dispatch(editFormThunk({ value, description, currency, method, tag }));
+  };
 
   render() {
-    const { currencies } = this.props;
+    const { currencies, editor } = this.props;
     const { value, description } = this.state;
     return (
       <div>
@@ -99,13 +101,24 @@ class WalletForm extends Component {
           <option value="Transporte">Transporte</option>
           <option value="Saúde">Saúde</option>
         </select>
-        <button
-          type="button"
-          onClick={ this.handleClick }
-        >
-          Adicionar despesa
+        {
+          editor
+            ? (
+              <button type="button" onClick={ this.editHandleClick }>
+                Editar despesa
+              </button>
+            )
+            : (
+              <button
+                type="button"
+                onClick={ this.handleClick }
+              >
+                Adicionar despesa
 
-        </button>
+              </button>
+            )
+
+        }
       </div>
     );
   }
@@ -114,11 +127,13 @@ class WalletForm extends Component {
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   expenses: state.wallet.espenses,
+  editor: state.wallet.editor,
 });
 
 export default connect(mapStateToProps)(WalletForm);
 
 WalletForm.propTypes = {
-  currencies: propTypes.arrayOf(propTypes.string).isRequired,
-  dispatch: propTypes.func.isRequired,
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  editor: PropTypes.bool.isRequired,
 };

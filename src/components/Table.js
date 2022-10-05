@@ -1,20 +1,25 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteExpense } from '../redux/actions';
+import { deleteExpense, editExpense } from '../redux/actions';
 
 class Table extends Component {
-  handleClick = ({ target: { id } }) => {
+  deleteHandleClick = ({ target: { id } }) => {
     const { dispatch } = this.props;
     dispatch(deleteExpense(id));
+  };
+
+  editHandleClick = (id) => {
+    const { dispatch } = this.props;
+    dispatch(editExpense(id));
   };
 
   render() {
     const { expenses } = this.props;
     return (
-      <tbody>
-        <table>
-          <thead>
+      <table>
+        <thead>
+          <tr>
             <th>Descrição</th>
             <th>Tag</th>
             <th>Método de pagamento</th>
@@ -24,7 +29,9 @@ class Table extends Component {
             <th>Valor convertido</th>
             <th>Moeda de conversão</th>
             <th>Editar/Excluir</th>
-          </thead>
+          </tr>
+        </thead>
+        <tbody>
           {expenses.map((expense) => (
             <tr key={ expense.id }>
               <td>{expense.description}</td>
@@ -39,11 +46,18 @@ class Table extends Component {
               </td>
               <td>Real</td>
               <td>
-                <button type="button">Editar</button>
+                <button
+                  type="button"
+                  onClick={ () => this.editHandleClick(expense.id) }
+                  data-testid="edit-btn"
+                >
+                  Editar
+
+                </button>
                 <button
                   type="button"
                   id={ expense.id }
-                  onClick={ this.handleClick }
+                  onClick={ this.deleteHandleClick }
                   data-testid="delete-btn"
                 >
                   Excluir
@@ -52,8 +66,8 @@ class Table extends Component {
               </td>
             </tr>
           ))}
-        </table>
-      </tbody>
+        </tbody>
+      </table>
     );
   }
 }

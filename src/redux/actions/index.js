@@ -5,6 +5,9 @@ export const INITIAL_REQ = 'INITIAL_REQ';
 export const FINAL_REQ = 'FINAL_REQ';
 export const GET_RATES = 'GET_RATES';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const EDIT_FORM_THUNK = 'EDIT_FORM_THUNK';
+export const EDIT_FORM_CLICK = 'EDIT_FORM_THUNK';
 
 // Pegar email do estado local
 export const getEmail = (email) => ({
@@ -60,4 +63,23 @@ export const getWalletForm = (obj) => async (dispatch) => {
   } catch (e) {
     throw new Error(e);
   }
+};
+export const editExpense = (id) => ({
+  type: EDIT_EXPENSE,
+  id,
+});
+export const editFormClick = (objState) => ({
+  type: EDIT_FORM_CLICK,
+  payload: objState,
+});
+
+export const editFormThunk = (objState) => (dispatch, getState) => {
+  const getId = getState().wallet.expenses.findIndex((expense) => expense.id
+  === Number(getState().wallet.idToEdit));
+  const newState = {
+    ...objState,
+    id: getId,
+    exchangeRates: getState().wallet.expenses[getId].exchangeRates,
+  };
+  dispatch(editFormClick(newState));
 };

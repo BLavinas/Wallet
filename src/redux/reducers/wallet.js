@@ -5,7 +5,10 @@ import {
   FINAL_REQ,
   GET_CURRENCIESAPI,
   GET_RATES,
-  DELETE_EXPENSE } from '../actions';
+  DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  EDIT_FORM_CLICK,
+} from '../actions';
 
 const INITAL_STATE = {
   currencies: [], // array de string
@@ -41,7 +44,26 @@ const wallet = (state = INITAL_STATE, action) => {
     return {
       ...state,
       expenses: state.expenses.filter((expense) => Number(expense.id)
-      !== Number(action.payload)),
+        !== Number(action.payload)),
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      idToEdit: action.id,
+      editor: state.editor !== true,
+    };
+  case EDIT_FORM_CLICK:
+    return {
+      ...state,
+      editor: false,
+      expenses: state.expenses.map((expense) => {
+        if (Number(expense.id) === Number(state.idToEdit)) {
+          return {
+            ...action.payload,
+          };
+        }
+        return expense;
+      }),
     };
   default:
     return state;
