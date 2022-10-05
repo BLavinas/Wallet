@@ -104,7 +104,11 @@ class WalletForm extends Component {
         {
           editor
             ? (
-              <button type="button" onClick={ this.editHandleClick }>
+              <button
+                type="button"
+                onClick={ this.editHandleClick }
+
+              >
                 Editar despesa
               </button>
             )
