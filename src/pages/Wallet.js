@@ -9,7 +9,7 @@ class Wallet extends React.Component {
     return (
       <div>
         <Header />
-        <h1 className='Title'>TrybeWallet</h1>
+        <h1 className='Title'>MyWallet</h1>
         <br />
         <br />
         <br />
