@@ -18,4 +18,5 @@ Nesta aplicação você poderá controlar seus gastos e fazer a conversão de mo
 <li>Criar dispatchers no Redux em aplicações React;</li>
 <li>Conectar Redux aos componentes React;</li>
 <li>Criar actions assíncronas na sua aplicação React que faz uso de Redux</li>
+<li>Estilização da tabela, botões e inputs realizados com MaterialUI</li>
 </ul>
