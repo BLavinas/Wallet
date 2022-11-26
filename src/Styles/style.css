@@ -1,0 +1,29 @@
+.header{
+  display: flex;
+  height: 50px;
+  width: 400px;
+  margin-left: 1500px;
+  justify-content: space-around;
+  border: 0.3px rgb(7, 70, 45) solid;
+  position: fixed;
+}
+
+.Title {
+  text-align: center;
+}
+
+.TitleWallet {
+  text-align: center;
+}
+
+.loginTitle{
+  margin-top: 150px;
+  text-align: center;
+}
+
+.inputStyle{
+  display: flex;
+  justify-content: center;
+  margin-top: 145px;
+
+}

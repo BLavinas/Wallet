@@ -6,6 +6,11 @@
     "node": "16"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/icons-material": "^5.10.15",
+    "@mui/material": "^5.10.15",
     "@redux-devtools/extension": "3.2.2",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.3.0",

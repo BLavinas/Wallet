@@ -1,8 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
 import { getEmail } from '../redux/actions';
+import ResponsiveFontSizes from '../components/MuiHeaders';
+import '../Styles/style.css'
+
+
 
 class Login extends React.Component {
   state = {
@@ -40,29 +49,43 @@ class Login extends React.Component {
 
     return (
       <div>
-        Login
-        <input
+        <div className='loginTitle'>
+        {ResponsiveFontSizes('h3', 'Carteira')}
+        </div>
+        <div className='inputStyle'>
+        <TextField
+          id="outlined-basic"
+          label="Usuário"
+          variant="outlined"
           type="text"
           name="email"
           data-testid="email-input"
           placeholder="Email"
           onChange={ this.handleChange }
         />
-        <input
+
+        <TextField
+          id="outlined-password-input"
+          label="Senha"
+          autoComplete="current-password"
           type="password"
           name="password"
           data-testid="password-input"
           placeholder="Senha"
           onChange={ this.handleChange }
         />
-        <button
+        <Stack spacing={2} direction="row">
+        <Button
+          variant="contained"
           type="button"
           disabled={ isBtnDisabled }
           onClick={ this.handleClick }
         >
           Entrar
 
-        </button>
+        </Button>
+        </Stack>
+        </div>
       </div>
     );
   }

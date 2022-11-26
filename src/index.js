@@ -6,13 +6,18 @@ import { Provider } from 'react-redux';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/store';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { theme } from './Styles/CustomTheme';
 
 ReactDOM
   .createRoot(document.getElementById('root'))
   .render(
     <BrowserRouter>
       <Provider store={ store }>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
         <App />
+        </ThemeProvider>
       </Provider>
     </BrowserRouter>,
   );
